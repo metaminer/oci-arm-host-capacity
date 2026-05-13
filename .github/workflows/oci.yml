@@ -1,18 +1,5 @@
-name: OCI ARM Instance Creation
-on:
-  schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
-
-jobs:
-  create-instance:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
+- name: Install dependencies
+        run: composer install --no-dev
       - name: Run
         env:
           OCI_USER_ID: ${{ secrets.OCI_USER_ID }}
@@ -23,4 +10,4 @@ jobs:
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
           OCI_IMAGE_ID: ${{ secrets.OCI_IMAGE_ID }}
           OCI_AVAILABILITY_DOMAIN: ${{ secrets.OCI_AVAILABILITY_DOMAIN }}
-        run: php run.php
+        run: php index.php
